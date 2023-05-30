@@ -1,0 +1,198 @@
+import pandas as pd
+import seaborn as sns
+
+df = pd.read_csv("/content/kerala.csv")
+
+import matplotlib.pyplot as plt
+
+df.head()
+
+df.columns
+
+df.head()
+
+cor = df.corr()
+
+cor
+
+plt.figure(figsize=(10,8))
+sns.heatmap(data = cor, annot = True, cmap = "mako" ,center = 0)
+
+cor_target2 = abs(cor["FLOODS"])
+cor_target12=cor_target2.drop(labels=["FLOODS"])
+relevant_features2 = cor_target2[cor_target2>0.3]
+df=df[relevant_features2.index]
+X1 = df.iloc[:, 0:len(df.columns)-1].values
+y1 = df.iloc[:,len(df.columns)-1].values
+relevant_features2 
+
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler,MinMaxScaler,RobustScaler
+from scipy import stats
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score,confusion_matrix,f1_score
+from sklearn.model_selection import cross_val_score
+
+sc = MinMaxScaler()
+X1 = sc.fit_transform(X1)
+X1 = sc.transform(X1)
+
+X_train, X_test, y_train, y_test = train_test_split(X1,y1 ,
+                                   random_state=104, 
+                                   test_size=0.25, 
+                                   shuffle=True)
+
+from sklearn.naive_bayes import GaussianNB
+c1 = GaussianNB()
+from sklearn.neighbors import KNeighborsClassifier
+c2 = KNeighborsClassifier(n_neighbors=7)
+from sklearn import tree
+c3 = tree.DecisionTreeClassifier()
+from sklearn.ensemble import RandomForestClassifier
+c4 = RandomForestClassifier(max_depth=2, random_state=0)
+from sklearn.svm import SVC
+c5 = SVC(kernel='rbf')
+from sklearn.linear_model import LogisticRegression
+c6 = LogisticRegression()
+from sklearn.linear_model import SGDClassifier
+c7 = SGDClassifier(loss="hinge", penalty="l2", max_iter=5)
+
+c1.fit(X_train,y_train)
+c2.fit(X_train,y_train)
+c3.fit(X_train,y_train)
+c4.fit(X_train,y_train)
+c5.fit(X_train,y_train)
+c6.fit(X_train,y_train)
+c7.fit(X_train,y_train)
+
+
+y_pred1 = c1.predict(X_test)
+y_pred2 = c2.predict(X_test)
+y_pred3 = c3.predict(X_test)
+y_pred4 = c4.predict(X_test)
+y_pred5 = c5.predict(X_test)
+y_pred6 = c6.predict(X_test)
+y_pred7 = c7.predict(X_test)
+
+
+print(accuracy_score(y_test, y_pred1))
+print(accuracy_score(y_test, y_pred2))
+print(accuracy_score(y_test, y_pred3))
+print(accuracy_score(y_test, y_pred4))
+print(accuracy_score(y_test, y_pred5))
+print(accuracy_score(y_test, y_pred6))
+print(accuracy_score(y_test, y_pred7))
+
+graph:
+
+import matplotlib.pyplot as plt
+
+classifiers = ['GaussianNB' , 'KNeighborsClassifier', 'DecisionTreeClassifier', ' RandomForestClassifier', 'SVC', 'LogisticRegression']
+accuracy = [0.9666666666666667, 0.7333333333333333, 0.9666666666666667, 0.9666666666666667, 0.36666666666666664, 0.36666666666666664, 0.6333333333333333]
+plt.figure(figsize=(8,6))
+
+error:
+
+plt.plot(classifiers, accuracy, marker='0')
+
+plt.xlabel('Classifiers')
+plt.ylabel('Accuracy')
+plt.title('Accuracy of Classifiers')
+plt.ylim(0, 1)  
+plt.xticks(rotation=45)
+
+plt.tight_layout()  
+plt.show()
+
+
+table:
+
+print(y_pred1)
+
+print(y_pred2)
+
+print(y_pred3)
+
+print(y_pred4)
+
+print(y_pred5)
+
+print(y_pred6)
+
+print(y_pred7)
+
+pd.read_excel('/content/result.xlsx')
+
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
+accuracy = accuracy_score(y_test, y_pred1)
+print("Accuracy:", accuracy)
+precision = precision_score(y_test, y_pred1)
+print("Precision:", precision)
+recall = recall_score(y_test, y_pred1)
+print("Recall:", recall)
+f1 = f1_score(y_test, y_pred1)
+print("F1-score:", f1)
+
+
+accuracy = accuracy_score(y_test, y_pred2)
+print("Accuracy:", accuracy)
+precision = precision_score(y_test, y_pred2)
+print("Precision:", precision)
+recall = recall_score(y_test, y_pred2)
+print("Recall:", recall)
+f1 = f1_score(y_test, y_pred2)
+print("F1-score:", f1)
+
+
+accuracy = accuracy_score(y_test, y_pred3)
+print("Accuracy:", accuracy)
+precision = precision_score(y_test, y_pred3)
+print("Precision:", precision)
+recall = recall_score(y_test, y_pred3)
+print("Recall:", recall)
+f1 = f1_score(y_test, y_pred3)
+print("f1:", recall)
+
+
+accuracy = accuracy_score(y_test, y_pred4)
+print("Accuracy:", accuracy)
+precision = precision_score(y_test, y_pred4)
+print("Precision:", precision)
+recall = recall_score(y_test, y_pred4)
+print("Recall:", recall)
+f1 = f1_score(y_test, y_pred4)
+print("F1-score:", f1)
+
+accuracy = accuracy_score(y_test, y_pred5)
+print("Accuracy:", accuracy)
+precision = precision_score(y_test, y_pred5)
+print("Precision:", precision)
+recall = recall_score(y_test, y_pred5)
+print("Recall:", recall)
+f1 = f1_score(y_test, y_pred5)
+print("F1-score:", f1)
+
+
+accuracy = accuracy_score(y_test, y_pred6)
+print("Accuracy:", accuracy)
+precision = precision_score(y_test, y_pred6)
+print("Precision:", precision)
+recall = recall_score(y_test, y_pred6)
+print("Recall:", recall)
+f1 = f1_score(y_test, y_pred6)
+print("F1-score:", f1)
+
+accuracy = accuracy_score(y_test, y_pred7)
+print("Accuracy:", accuracy)
+precision = precision_score(y_test, y_pred7)
+print("Precision:", precision)
+recall = recall_score(y_test, y_pred7)
+print("Recall:", recall)
+f1 = f1_score(y_test, y_pred7)
+print("F1-score:", f1)
+
+
